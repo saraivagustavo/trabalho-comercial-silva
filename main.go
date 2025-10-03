@@ -1,10 +1,16 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"trabalho/classes"
+)
 
 func main() {
+	cliente := classes.NewCliente()
 
-	var preco float32 = 9.99
+	funcionario := classes.NewFuncionario()
 
-	fmt.Println(preco)
+	fmt.Println(cliente.ToString())
+	fmt.Println(funcionario.ToString())
+
 }
