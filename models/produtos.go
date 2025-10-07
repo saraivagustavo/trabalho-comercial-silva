@@ -48,10 +48,10 @@ func (item *Produto) GetNome() string {
 func (item *Produto) GetDescricao() string {
 	return item.descricao
 }
-func (item *Produto) GetPreco() float32 {
+func (item *Produto) GetPrecoProduto() float32 {
 	return item.preco
 }
-func (item *Produto) GetEstoque() int {
+func (item *Produto) GetQuantidadeEstoque() int {
 	return item.quantidadeEstoque
 }
 
@@ -74,7 +74,7 @@ func (item *Produto) SetPreco() {
 	fmt.Scan(temp)
 	item.preco = temp
 }
-func (item *Produto) SetEstoque() {
+func (item *Produto) SetQuantidadeEstoque() {
 	var temp int
 	fmt.Println("Estoque: ")
 	fmt.Scan(temp)

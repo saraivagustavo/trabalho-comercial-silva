@@ -7,12 +7,12 @@ import (
 	"trabalho/models"
 )
 
-//mesma lógica do cliente_view
+// mesma lógica do cliente_view
 func SolicitarDadosFuncionario() (nome, login, tipo, telefone, email, cargo, matricula string) {
 	scanner := bufio.NewReader(os.Stdin)
 
 	fmt.Println("\n--- CADASTRO DE NOVO FUNCIONÁRIO ---")
-	
+
 	fmt.Print("Nome Completo: ")
 	nome, _ = scanner.ReadString('\n')
 
@@ -37,7 +37,8 @@ func SolicitarDadosFuncionario() (nome, login, tipo, telefone, email, cargo, mat
 
 	return
 }
-//mesma lógica do cliente_view
+
+// mesma lógica do cliente_view
 func ExibirFuncionario(funcionario *models.Funcionario) {
 	fmt.Println("\n--- FUNCIONÁRIO CADASTRADO ---")
 	fmt.Println(funcionario.ToString())
