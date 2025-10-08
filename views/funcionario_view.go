@@ -44,3 +44,15 @@ func ExibirFuncionario(funcionario *models.Funcionario) {
 	fmt.Println(funcionario.ToString())
 	fmt.Println("------------------------------")
 }
+
+// segue a mesma lógica do cliente_view pra exibir a lista de funcionários
+func ExibirListaFuncionarios(funcionarios map[string]*models.Funcionario) {
+	fmt.Println("\n--- LISTA DE FUNCIONÁRIOS ---")
+	if len(funcionarios) == 0 {
+		fmt.Println("Nenhum funcionário cadastrado.")
+		return
+	}
+	for _, funcionario := range funcionarios {
+		fmt.Println(funcionario.ToString())
+	}
+}

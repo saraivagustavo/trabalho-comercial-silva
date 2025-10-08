@@ -1,9 +1,9 @@
 package views
 
 import (
-	"bufio" //para ler strings 
-	"fmt" //pra imprimir na tela
-	"os" //ler do terminal
+	"bufio"           //para ler strings
+	"fmt"             //pra imprimir na tela
+	"os"              //ler do terminal
 	"trabalho/models" //pegar as structs
 )
 
@@ -37,9 +37,22 @@ func SolicitarDadosCliente() (nome, login, tipo, telefone, email, identificacao,
 	return
 }
 
-//a função exibe os dados de um cliente passado como parâmetro
+// a função exibe os dados de um cliente passado como parâmetro
 func ExibirCliente(cliente *models.Cliente) {
 	fmt.Println("\n--- CLIENTE CADASTRADO ---")
 	fmt.Println(cliente.ToString())
 	fmt.Println("--------------------------")
+}
+
+// função pra exibir todos os clientes cadastrados
+func ExibirListaClientes(clientes map[string]*models.Cliente) { //usar map aqui porque a database armazena os clientes em um map
+	fmt.Println("\n--- LISTA DE CLIENTES ---")
+	if len(clientes) == 0 {
+		fmt.Println("Nenhum cliente cadastrado.")
+		return
+	}
+	for _, cliente := range clientes { //loop pra percorrer o map e exibir cada cliente
+		fmt.Println(cliente.ToString())
+		fmt.Println("-------------------------")
+	}
 }

@@ -19,8 +19,16 @@ func main() {
 			controllers.CadastrarCliente()
 
 		case 2:
+			fmt.Println("\nListando Clientes...")
+			controllers.ListarClientes()
+
+		case 3:
 			fmt.Println("\nCadastrando Funcionário...")
 			controllers.CadastrarFuncionario()
+
+		case 4:
+			fmt.Println("\nListando Funcionários...")
+			controllers.ListarFuncionarios()
 
 		case 0:
 			fmt.Println("\nSaindo...")
@@ -28,7 +36,7 @@ func main() {
 
 		default:
 			fmt.Println("\nOpção inválida, tente novamente!")
-			
+
 		}
 	}
 

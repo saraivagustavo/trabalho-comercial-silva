@@ -5,7 +5,9 @@ import "fmt"
 func MostrarMenu() {
 	fmt.Println("\n====== COMERCIAL SILVA ======")
 	fmt.Println("1. Cadastrar Cliente")
-	fmt.Println("2. Cadastrar Funcionário")
+	fmt.Println("2. Listar Clientes")
+	fmt.Println("3. Cadastrar Funcionário")
+	fmt.Println("4. Listar Funcionários")
 	fmt.Println("0. Sair")
 	fmt.Println("=============================")
 	fmt.Print("Opção: ")

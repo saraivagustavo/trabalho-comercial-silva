@@ -1,17 +1,17 @@
 package controllers
 
 import (
+	"strings"
 	"trabalho/database"
 	"trabalho/models"
 	"trabalho/views"
-	"strings"
 )
 
-//mesma lógica do cliente_controller
+// mesma lógica do cliente_controller
 func CadastrarFuncionario() {
 	// 1. view coleta os dados
 	nome, login, tipo, telefone, email, cargo, matricula := views.SolicitarDadosFuncionario()
-	
+
 	//tem que ver como vai ser a senha depois
 	senhaTeste := "123456"
 
@@ -32,4 +32,9 @@ func CadastrarFuncionario() {
 
 	// 4. view exibe o resultado do cadastro
 	views.ExibirFuncionario(novoFuncionario)
+}
+
+func ListarFuncionarios() {
+	funcionarios := database.FuncionariosDB
+	views.ExibirListaFuncionarios(funcionarios)
 }

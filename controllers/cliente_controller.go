@@ -1,14 +1,14 @@
 package controllers
 
 import (
+	"strings"
 	"trabalho/database"
 	"trabalho/models"
 	"trabalho/views"
-	"strings"
 )
 
-//a função CadastrarCliente vai gerenciar o fluxo de cadastro de um cliente
-//ela orquestra a interação entre a View e o Model
+// a função CadastrarCliente vai gerenciar o fluxo de cadastro de um cliente
+// ela orquestra a interação entre a View e o Model
 func CadastrarCliente() {
 	//1. usa a função de dentro da viiew pra solicitar os dados do cliente
 	nome, login, tipo, telefone, email, identificacao, endereco := views.SolicitarDadosCliente()
@@ -30,4 +30,10 @@ func CadastrarCliente() {
 
 	//4. printa a confirmação de que cadastrou o cliente
 	views.ExibirCliente(novoCliente)
+}
+
+// usa a função de listar clientes da view
+func ListarClientes() {
+	clientes := database.ClientesDB     //pega os dados do banco
+	views.ExibirListaClientes(clientes) //manda pra view exibir a lista
 }
