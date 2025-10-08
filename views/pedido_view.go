@@ -6,6 +6,7 @@ import (
 	"os"
 	"strings"
 	"trabalho/models"
+	"trabalho/utils"
 	//"time"
 )
 
@@ -18,23 +19,22 @@ func SolicitarIdentificacaoCliente() string {
 	return identificacao
 }
 
-// funçãopra solicitar ao usuário os produtos que ele vai querer no pedido
-func SelecionarProduto() (nomeProduto string, quantidadeStr string) {
-	scanner := bufio.NewReader(os.Stdin)
-	fmt.Print("Digite o nome do produto que deseja adicionar (ou 'fim' para sair): ")
-	nomeProduto, _ = scanner.ReadString('\n') //lê o nome do produto
+// função pra solicitar ao usuário os produtos que ele vai querer no pedido
+func SelecionarProduto() (idProduto string, quantidadeStr string) {
+	fmt.Print("Digite o id do produto que deseja adicionar (ou 'fim' para sair): ")
+	idProduto = utils.LerString() //lê o id do produto
 
-	if strings.TrimSpace(nomeProduto) != "fim" {
-		fmt.Printf("Digite a quantidade de '%s': ", strings.TrimSpace(nomeProduto))
-		quantidadeStr, _ = scanner.ReadString('\n') // Lê a quantidade como string
+	if strings.TrimSpace(idProduto) != "" {
+		fmt.Printf("Digite a quantidade de '%s': ", strings.TrimSpace(idProduto))
+		quantidadeStr = utils.LerString() // Lê a quantidade como string
 	}
-	return nomeProduto, quantidadeStr //retorna o nome do produto e a quantidade
+	return idProduto, quantidadeStr //retorna o id do produto e a quantidade
 }
 
 // função pra exibir o resumo do pedido do cliente
 func ExibirDetalhesPedido(pedido *models.Pedido) {
 	fmt.Println("\n--- RESUMO DO PEDIDO ---")
-	fmt.Printf("Cliente: %s\n", pedido.GetCliente()) //usa o getter do cliente pra pegar o nome do cliente
+	fmt.Printf("Cliente: %s\n", pedido.GetCliente().GetNome()) //usa o getter do cliente pra pegar o nome do cliente
 	fmt.Println("Itens: ")
 	if len(pedido.GetItens()) == 0 { //verifica se o cliente adicionou algum item
 		fmt.Println("Nenhum item adicionado.")

@@ -94,7 +94,7 @@ func SolicitarNovosDadosCliente(cliente *models.Cliente) (nome, login, telefone,
 }
 
 // ConfirmarExclusao só pra segurança de não deletar o cliente errado sem querer
-func ConfirmarExclusao(cliente *models.Cliente) bool {
+func ConfirmarExclusaoCliente(cliente *models.Cliente) bool {
 	fmt.Printf("Tem certeza que deseja excluir o cliente: %s (CPF/CNPJ: %s)?\n", cliente.GetNome(), cliente.GetIdentificacao())
 	fmt.Print("Digite 's' para confirmar: ")
 	resposta := utils.LerString()

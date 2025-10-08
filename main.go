@@ -18,14 +18,14 @@ func main() {
 		case 1:
 			controllers.GerenciarClientes()
 
-		// case 2:
-		// 	controllers.GerenciarFuncionarios()
+		case 2:
+			controllers.GerenciarFuncionarios()
 
-		// case 3:
-		// 	controllers.GerenciarProdutos()
+		case 3:
+			controllers.GerenciarProdutos()
 
-		// case 4:
-		// 	controllers.GerenciarPedidos()
+		case 4:
+			controllers.GerenciarPedidos()
 
 		case 0:
 			fmt.Println("\nSaindo...")

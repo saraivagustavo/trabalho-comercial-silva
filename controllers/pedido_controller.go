@@ -6,6 +6,7 @@ import (
 	"strings"
 	"trabalho/database"
 	"trabalho/models"
+	"trabalho/utils"
 	"trabalho/views"
 )
 
@@ -18,7 +19,7 @@ func CriarPedidoController() {
 	//o controller busca o cliente no banco de dados usando a identificação que puxou da view
 	cliente, existe := database.ClientesDB[identificacao]
 	if !existe {
-		fmt.Print("ERRO: Cliente com documento '" + identificacao + "' não encontrado!")
+		fmt.Print("Cliente com documento '" + identificacao + "' não encontrado!")
 		return
 	}
 	fmt.Print("Cliente encontrado: " + cliente.GetNome())
@@ -29,17 +30,13 @@ func CriarPedidoController() {
 	for {
 		//só pra teste, exibe os detalhes do pedido a cada iteração
 		views.ExibirDetalhesPedido(novoPedido)
-
-		// aqui seria legal ter uma função na view pra exibir os produtos disponíveis, ajuda o cara a saber o que ele pode pedir
+		views.ExibirListaProdutos(database.ProdutosDB)
 
 		//solicita o produto e a quantidade do produto pra view
-		nomeProduto, quantidadeStr := views.SelecionarProduto()
+		idProduto, quantidadeStr := views.SelecionarProduto()
 
-		// O controller limpa os dados do nome do produto
-		nomeProduto = strings.TrimSpace(nomeProduto)
-
-		// Condição de saída do loop.
-		if nomeProduto == "fim" {
+		//se for vazia, saí do loop
+		if idProduto == "" {
 			break
 		}
 
@@ -53,9 +50,9 @@ func CriarPedidoController() {
 		}
 
 		// o controller tem que verificar se o produto existe no banco de dados
-		produto, existe := database.ProdutosDB[nomeProduto]
+		produto, existe := database.ProdutosDB[idProduto]
 		if !existe {
-			fmt.Print("Produto '" + nomeProduto + "' não encontrado!")
+			fmt.Print("Produto '" + idProduto + "' não encontrado!")
 			continue
 		}
 
@@ -81,5 +78,40 @@ func CriarPedidoController() {
 
 	} else { //se a view retornar false, cancela o pedido
 		fmt.Print("Pedido cancelado pelo usuário.")
+	}
+}
+
+// função pra listar os pedidos do banco
+func ListarPedidos() {
+	pedidos := database.PedidosDB
+	if len(pedidos) == 0 {
+		fmt.Print("Nenhum pedido foi realizado ainda.")
+		return
+	}
+	for id, pedido := range pedidos {
+		fmt.Printf("\n--- PEDIDO ID: #%d ---\n", id)
+		views.ExibirDetalhesPedido(pedido)
+	}
+}
+
+func GerenciarPedidos() {
+	for {
+		views.MostrarSubMenu("Pedidos")
+		opcao := utils.LerOpcao()
+
+		switch opcao {
+		case 1:
+			CriarPedidoController()
+		case 2:
+			ListarPedidos()
+		case 3:
+
+		case 4:
+			fmt.Print("Funcionalidade ainda não implementada.")
+		case 0:
+			return
+		default:
+			fmt.Print("Opção inválida!")
+		}
 	}
 }

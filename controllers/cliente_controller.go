@@ -90,7 +90,7 @@ func DeletarCliente() {
 	}
 
 	// 3. confirma se realmente quer deletar chamando a função da view
-	if views.ConfirmarExclusao(cliente) {
+	if views.ConfirmarExclusaoCliente(cliente) {
 		// 4. se voltou como true, deleta o cliente do banco
 		delete(database.ClientesDB, identificacao)
 		fmt.Print("Cliente excluído com sucesso.")

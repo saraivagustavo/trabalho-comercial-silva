@@ -31,7 +31,12 @@ func (funcionario *Funcionario) GetMatricula() string {
 	return funcionario.matricula
 }
 
+// ===== Setters da classe =====
+func (funcionario *Funcionario) SetCargo(novoCargo string) {
+	funcionario.cargo = novoCargo
+}
 
+// formatação dos dados do funcionário
 func (f *Funcionario) ToString() string {
 	return "\n--- DADOS DO FUNCIONÁRIO ---\n" +
 		"Nome: " + f.GetNome() + "\n" +

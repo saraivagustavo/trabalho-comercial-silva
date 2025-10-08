@@ -4,7 +4,9 @@ import (
 	"bufio"
 	"fmt"
 	"os"
+	"strings"
 	"trabalho/models"
+	"trabalho/utils"
 )
 
 // mesma lógica do cliente_view
@@ -55,4 +57,46 @@ func ExibirListaFuncionarios(funcionarios map[string]*models.Funcionario) {
 	for _, funcionario := range funcionarios {
 		fmt.Println(funcionario.ToString())
 	}
+}
+
+// SolicitarMatricula segue a mesma lógica do cliente_view pra pedir a identificação do funcionário, mas aqui é a matrícula
+func SolicitarMatricula(acao string) string {
+	fmt.Printf("\n--- %s Funcionário ---\n", acao) //ação vai ser "Editar" ou "Deletar", vai puxar a string que foi passada como parâmetro
+	fmt.Print("Digite a matrícula do funcionário: ")
+	return utils.LerString()
+}
+
+// SolicitarNovosDadosFuncionario pra atualizar os dados do funcionário, se não quiser mudar todos os dados, se o usuário apertar enter, mantém o valor que já tava
+func SolicitarNovosDadosFuncionario(funcionario *models.Funcionario) (nome, login, telefone, email, cargo, matricula string) {
+	fmt.Println("\nDigite os novos dados. Pressione ENTER para manter o valor atual.")
+
+	// nome
+	fmt.Printf("Nome atual: %s\nNovo nome: ", funcionario.GetNome())
+	nome = utils.LerString()
+
+	// login
+	fmt.Printf("Login atual: %s\nNovo login: ", funcionario.GetLogin())
+	login = utils.LerString()
+
+	// telefone
+	fmt.Printf("Telefone atual: %s\nNovo telefone: ", funcionario.GetTelefone())
+	telefone = utils.LerString()
+
+	// email
+	fmt.Printf("Email atual: %s\nNovo email: ", funcionario.GetEmail())
+	email = utils.LerString()
+
+	// cargo
+	fmt.Printf("Cargo atual: %s\nNovo cargo: ", funcionario.GetCargo())
+	cargo = utils.LerString()
+
+	return
+}
+
+// ConfirmarExclusao só pra segurança de não deletar o funcionário errado sem querer
+func ConfirmarExclusaoFuncionario(funcionario *models.Funcionario) bool {
+	fmt.Printf("Tem certeza que deseja excluir o funcionário: %s (Matrícula: %s)?\n", funcionario.GetNome(), funcionario.GetMatricula())
+	fmt.Print("Digite 's' para confirmar: ")
+	resposta := utils.LerString()
+	return strings.ToLower(resposta) == "s" //se for 's' isso da true e confirma a exclusão
 }
