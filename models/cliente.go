@@ -10,17 +10,17 @@ type Cliente struct {
 
 // ===== CONSTRUTOR DA CLASSE =====
 func NewCliente(nome, login, tipo, telefone, email, identificacao, endereco string) *Cliente {
-    return &Cliente{
-        Usuario: Usuario{
-            nome:     nome,
-            login:    login,
-            tipo:     tipo,
-            telefone: telefone,
-            email:    email,
-        },
-        identificacao: identificacao,
-        endereco:      endereco,
-    }
+	return &Cliente{
+		Usuario: Usuario{
+			nome:     nome,
+			login:    login,
+			tipo:     tipo,
+			telefone: telefone,
+			email:    email,
+		},
+		identificacao: identificacao,
+		endereco:      endereco,
+	}
 }
 
 // ===== GETTERS para os campos =====
@@ -32,6 +32,10 @@ func (cliente *Cliente) GetEndereco() string {
 	return cliente.endereco
 }
 
+// ===== Setters da classe =====
+func (cliente *Cliente) SetEndereco(novoEndereco string) {
+	cliente.endereco = novoEndereco
+}
 
 // ===== Métodos da classe =====
 func (c *Cliente) IdentificacaoFormatada() string {

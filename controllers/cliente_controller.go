@@ -1,9 +1,11 @@
 package controllers
 
 import (
+	"fmt"
 	"strings"
 	"trabalho/database"
 	"trabalho/models"
+	"trabalho/utils"
 	"trabalho/views"
 )
 
@@ -36,4 +38,85 @@ func CadastrarCliente() {
 func ListarClientes() {
 	clientes := database.ClientesDB     //pega os dados do banco
 	views.ExibirListaClientes(clientes) //manda pra view exibir a lista
+}
+
+// função pra editar os dados do cliente
+func EditarCliente() {
+	// 1. pede a identificação que é a chave pra achar o cliente no banco
+	identificacao := views.SolicitarIdentificacao("editar")
+
+	// 2. busca o cliente no banco verificando se existe
+	cliente, existe := database.ClientesDB[identificacao]
+	if !existe {
+		fmt.Print("Cliente não encontrado.")
+		return
+	}
+
+	// 3. exibe o cliente que achou e solicita os novos dados
+	views.ExibirCliente(cliente)
+	nome, login, telefone, email, endereco := views.SolicitarNovosDadosCliente(cliente)
+
+	// 4. atualiza os dados (lembrando que se o usuário apertar enter, mantém o valor que já tava)
+	if nome != "" {
+		cliente.SetNome(nome)
+	}
+	if login != "" {
+		cliente.SetLogin(login)
+	}
+	if telefone != "" {
+		cliente.SetTelefone(telefone)
+	}
+	if email != "" {
+		cliente.SetEmail(email)
+	}
+	if endereco != "" {
+		cliente.SetEndereco(endereco)
+	}
+
+	fmt.Print("Cliente atualizado com sucesso!")
+	views.ExibirCliente(cliente)
+}
+
+// função pra deletar um cliente
+func DeletarCliente() {
+	// 1. pede a identificação que é a chave pra achar o cliente no banco
+	identificacao := views.SolicitarIdentificacao("deletar")
+
+	// 2. busca o cliente no banco verificando se existe
+	cliente, existe := database.ClientesDB[identificacao]
+	if !existe {
+		fmt.Print("Cliente não encontrado.")
+		return
+	}
+
+	// 3. confirma se realmente quer deletar chamando a função da view
+	if views.ConfirmarExclusao(cliente) {
+		// 4. se voltou como true, deleta o cliente do banco
+		delete(database.ClientesDB, identificacao)
+		fmt.Print("Cliente excluído com sucesso.")
+	} else {
+		fmt.Print("Operação de exclusão cancelada.") //se não confirmou, cancela a exclusão
+	}
+}
+
+func GerenciarClientes() {
+	for {
+		views.MostrarSubMenu("Clientes")
+		opcao := utils.LerOpcao()
+
+		switch opcao {
+		case 1:
+			CadastrarCliente()
+		case 2:
+			ListarClientes()
+		case 3:
+			EditarCliente()
+		case 4:
+			DeletarCliente()
+		case 0:
+			return
+		default:
+			fmt.Println("Opção inválida!")
+		}
+	}
 }

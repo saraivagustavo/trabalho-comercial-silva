@@ -78,7 +78,7 @@ func (p *Pedido) AdicionarItem(produto *Produto, quantidade int) error {
 	}
 	p.itens = append(p.itens, item)
 
-	produto.SetQuantidadeEstoque()
+	produto.SetQuantidadeEstoque(produto.GetQuantidadeEstoque() - quantidade) // Atualiza o estoque do produto
 
 	p.calcularValorTotal()
 	return nil

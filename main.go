@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"trabalho/controllers"
+	"trabalho/utils"
 	"trabalho/views"
 )
 
@@ -10,25 +11,21 @@ func main() {
 	var opcao int
 
 	for {
-		views.MostrarMenu()
-		fmt.Scanln(&opcao)
+		views.MostrarMenuPrincipal()
+		opcao = utils.LerOpcao()
 
 		switch opcao {
 		case 1:
-			fmt.Println("\nCadastrando Cliente...")
-			controllers.CadastrarCliente()
+			controllers.GerenciarClientes()
 
-		case 2:
-			fmt.Println("\nListando Clientes...")
-			controllers.ListarClientes()
+		// case 2:
+		// 	controllers.GerenciarFuncionarios()
 
-		case 3:
-			fmt.Println("\nCadastrando Funcionário...")
-			controllers.CadastrarFuncionario()
+		// case 3:
+		// 	controllers.GerenciarProdutos()
 
-		case 4:
-			fmt.Println("\nListando Funcionários...")
-			controllers.ListarFuncionarios()
+		// case 4:
+		// 	controllers.GerenciarPedidos()
 
 		case 0:
 			fmt.Println("\nSaindo...")
