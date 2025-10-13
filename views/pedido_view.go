@@ -65,4 +65,5 @@ func ExibirConfirmacaoPedido(pedido *models.Pedido) {
 	fmt.Printf("Data do Pedido: %s\n", pedido.GetData())
 	fmt.Printf("Valor Total: R$ %.2f\n", pedido.GetValorTotal())
 	fmt.Println("-------------------------")
+
 }

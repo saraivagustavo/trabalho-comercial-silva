@@ -4,8 +4,11 @@ package utils
 import (
 	"bufio"
 	"os"
+	"os/exec"
+	"runtime"
 	"strconv"
 	"strings"
+	"time"
 )
 
 var scanner = bufio.NewReader(os.Stdin)
@@ -25,4 +28,21 @@ func LerOpcao() int {
 func LerString() string {
 	input, _ := scanner.ReadString('\n')
 	return strings.TrimSpace(input)
+}
+func ClearScreen() {
+	var cmd *exec.Cmd
+
+	switch runtime.GOOS {
+	case "windows":
+		cmd = exec.Command("cmd", "/c", "cls")
+	default: // Unix-like: Linux, macOS
+		cmd = exec.Command("clear")
+	}
+
+	cmd.Stdout = os.Stdout
+	cmd.Run()
+}
+
+func TimeToString(time time.Time) string {
+	return time.Format("02/01/2006 15:04:05")
 }

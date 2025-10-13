@@ -1,4 +1,3 @@
-// Arquivo: controllers/produto_controller.go
 package controllers
 
 import (

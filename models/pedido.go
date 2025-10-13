@@ -55,6 +55,12 @@ func (pedido *Pedido) GetConfirmado() bool {
 	return pedido.confirmado
 }
 
+//Setter que eu senti falta ;-;
+
+func (pedido *Pedido) SetConfirmado(bo bool) {
+	pedido.confirmado = bo
+}
+
 // Construtor pro Pedido
 func NewPedido(cliente *Cliente) *Pedido {
 	return &Pedido{
