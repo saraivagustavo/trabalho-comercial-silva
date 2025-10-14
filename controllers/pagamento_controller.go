@@ -9,7 +9,7 @@ import (
 	"trabalho/views"
 )
 
-func ProcessarPagamento(pedido models.Pedido) *models.Pagamento {
+func ProcessarPagamento(pedido *models.Pedido) *models.Pagamento {
 	var ans int
 	var forma string
 	var aprovado bool

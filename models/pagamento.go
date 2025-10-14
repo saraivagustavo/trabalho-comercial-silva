@@ -7,13 +7,13 @@ import (
 )
 
 type Pagamento struct {
-	pedido   Pedido
+	pedido   *Pedido
 	time     string
 	forma    string
 	aprovado bool
 }
 
-func NewPagamento(forma string, pedido Pedido, aprovado bool) *Pagamento {
+func NewPagamento(forma string, pedido *Pedido, aprovado bool) *Pagamento {
 	return &Pagamento{forma: forma, pedido: pedido, time: utils.TimeToString(time.Now()), aprovado: aprovado}
 }
 
@@ -27,7 +27,7 @@ func (pag *Pagamento) GetData() string {
 	return pag.time
 }
 func (pag *Pagamento) GetPedido() *Pedido {
-	return &pag.pedido
+	return pag.pedido
 }
 func (pag *Pagamento) GetForma() string {
 	return pag.forma

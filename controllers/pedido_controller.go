@@ -79,7 +79,7 @@ func CriarPedidoController() {
 		//Opção de Pagar?
 		fmt.Println("Deseja pagar seu pedido? (s/n)")
 		if utils.LerString() == "s" {
-			ProcessarPagamento(*novoPedido)
+			ProcessarPagamento(novoPedido)
 		}
 	} else { //se a view retornar false, cancela o pedido
 		fmt.Print("Pedido cancelado pelo usuário.")
@@ -113,7 +113,7 @@ func ListarPedidos() {
 					break
 				} else {
 					utils.ClearScreen()
-					ProcessarPagamento(*pedido)
+					ProcessarPagamento(pedido)
 					break
 				}
 			}

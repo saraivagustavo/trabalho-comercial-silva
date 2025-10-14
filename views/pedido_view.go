@@ -13,7 +13,7 @@ import (
 // função pra solicitar a identificação do cliente pra iniciar um novo pedido
 func SolicitarIdentificacaoCliente() string {
 	scanner := bufio.NewReader(os.Stdin)
-	fmt.Println("\n--- INICIARUM NOVO PEDIDO ---")
+	fmt.Println("\n--- INICIAR UM NOVO PEDIDO ---")
 	fmt.Print("Informe o CPF/CNPJ do cliente: ")
 	identificacao, _ := scanner.ReadString('\n')
 	return identificacao
@@ -21,7 +21,7 @@ func SolicitarIdentificacaoCliente() string {
 
 // função pra solicitar ao usuário os produtos que ele vai querer no pedido
 func SelecionarProduto() (idProduto string, quantidadeStr string) {
-	fmt.Print("Digite o id do produto que deseja adicionar (ou 'fim' para sair): ")
+	fmt.Print("Digite o id do produto que deseja adicionar (ou pressione ENTER para sair): ")
 	idProduto = utils.LerString() //lê o id do produto
 
 	if strings.TrimSpace(idProduto) != "" {
