@@ -9,18 +9,19 @@ import (
 	"trabalho/views"
 )
 
-func ProcessarPagamento(pedido models.Pedido) {
+func ProcessarPagamento(pedido models.Pedido) *models.Pagamento {
 	var ans int
 	var forma string
 	var aprovado bool
 	rand.Seed(time.Now().UnixNano())
+
 loop:
 	for {
 		ans = views.SelecionarFormaPagamento()
 		switch ans {
 		case 0:
 			fmt.Println("Pagamento Cancelado...")
-			return
+			return models.NewPagamento("", pedido, false)
 		case 1:
 			forma = "Pix"
 			aprovado = true
@@ -38,13 +39,14 @@ loop:
 			continue
 		}
 	}
-
+	pagamento := models.NewPagamento(forma, pedido, aprovado)
 	if aprovado {
-		pag := models.NewPagamento(forma, pedido).ToString()
-		views.ExibirNota(pag)
-		pedido.SetConfirmado(true)
-		views.MostrarMenuPrincipal()
+		views.ExibirNota(pagamento.ToString())
+		pedido.SetPagamento(true)
+		return pagamento
+
 	} else {
+		pedido.SetPagamento(false)
 		for {
 			fmt.Println("O pagamento foi recusado. Deseja tentar novamente? (s/n)")
 			resp := utils.LerString()
@@ -52,7 +54,7 @@ loop:
 			case "s":
 				ProcessarPagamento(pedido)
 			case "n":
-				views.MostrarMenuPrincipal()
+				return pagamento
 			}
 		}
 	}

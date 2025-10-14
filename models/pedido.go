@@ -19,6 +19,7 @@ type Pedido struct {
 	valorTotal float64
 	data       time.Time
 	confirmado bool
+	pagamento  bool
 }
 
 // Getters pro ItemPedido
@@ -54,11 +55,17 @@ func (pedido *Pedido) GetData() time.Time {
 func (pedido *Pedido) GetConfirmado() bool {
 	return pedido.confirmado
 }
+func (pedido *Pedido) GetPagamentoAprovado() bool {
+	return pedido.pagamento
+}
 
 //Setter que eu senti falta ;-;
 
 func (pedido *Pedido) SetConfirmado(bo bool) {
 	pedido.confirmado = bo
+}
+func (pedido *Pedido) SetPagamento(buuu bool) {
+	pedido.pagamento = buuu
 }
 
 // Construtor pro Pedido
@@ -68,6 +75,7 @@ func NewPedido(cliente *Cliente) *Pedido {
 		itens:      []*ItemPedido{},
 		data:       time.Now(),
 		confirmado: false,
+		pagamento:  false,
 	}
 }
 

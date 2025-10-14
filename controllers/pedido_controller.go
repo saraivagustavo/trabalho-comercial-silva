@@ -80,8 +80,6 @@ func CriarPedidoController() {
 		fmt.Println("Deseja pagar seu pedido? (s/n)")
 		if utils.LerString() == "s" {
 			ProcessarPagamento(*novoPedido)
-		} else {
-			novoPedido.SetConfirmado(false)
 		}
 	} else { //se a view retornar false, cancela o pedido
 		fmt.Print("Pedido cancelado pelo usuário.")
@@ -99,7 +97,7 @@ func ListarPedidos() {
 		fmt.Printf("\n--- PEDIDO ID: #%d ---\n", id)
 		views.ExibirDetalhesPedido(pedido)
 	}
-loop:
+
 	for {
 		fmt.Println("Deseja pagar algum pedido? (s/n)")
 		if utils.LerString() == "s" {
@@ -108,15 +106,15 @@ loop:
 			pedido, existe := database.PedidosDB[id]
 			if !existe {
 				fmt.Println("Id inválido!")
-				break loop
+				break
 			} else {
-				if pedido.GetConfirmado() {
+				if pedido.GetPagamentoAprovado() {
 					fmt.Println("O Pedido já foi pago!")
-					break loop
+					break
 				} else {
 					utils.ClearScreen()
 					ProcessarPagamento(*pedido)
-					break loop
+					break
 				}
 			}
 		}

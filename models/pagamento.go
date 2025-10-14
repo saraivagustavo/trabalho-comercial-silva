@@ -7,13 +7,19 @@ import (
 )
 
 type Pagamento struct {
-	pedido Pedido
-	time   string
-	forma  string
+	pedido   Pedido
+	time     string
+	forma    string
+	aprovado bool
 }
 
-func NewPagamento(forma string, pedido Pedido) *Pagamento {
-	return &Pagamento{forma: forma, pedido: pedido, time: utils.TimeToString(time.Now())}
+func NewPagamento(forma string, pedido Pedido, aprovado bool) *Pagamento {
+	return &Pagamento{forma: forma, pedido: pedido, time: utils.TimeToString(time.Now()), aprovado: aprovado}
+}
+
+// Set
+func (pag *Pagamento) SetAprovado(status bool) {
+	pag.aprovado = status
 }
 
 // Getters
@@ -50,7 +56,8 @@ func (nota *Pagamento) ToString() string {
    Nome: %s
    Documento: %s
  -----------------------------------------
- ITENS DO PEDIDO:%s
+ ITENS DO PEDIDO: 
+ %s
  -----------------------------------------
  VALOR TOTAL: R$ %.2f
  -----------------------------------------
